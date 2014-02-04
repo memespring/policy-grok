@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Regulation provisions{% endblock %}
+{% block content %}
+	<div class="page-header">
+	  <h1>Regulation provisions</h1>
+	</div>
+	<table  class="table">
+		{% for regulation in regulations %}
+			<tr>
+				<td>{{regulation}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

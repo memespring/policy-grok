@@ -1,0 +1,23 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "base.html" %}
+{% block title %}Add intent{% endblock %}
+{% block content %}
+	<div class="page-header">
+	  <h1>Add intent</h1>
+	</div>
+	<form action="" method="post">
+  	   	{{ render_field(form.title) }}
+  	   	{{ render_field(form.description) }}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Measured by
+		</div>
+		<div class="panel-body">
+  	   		{{form.measured_by}}
+		</div>
+	</div>
+  	   	
+<!--   	   	<p class="help-block">You can use markdown here</p> -->
+		<button type="submit" class="btn btn-primary">Save</button>
+  	 </form>
+{% endblock %}

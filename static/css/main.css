@@ -1,0 +1,42 @@
+body {
+    padding-top:60px;
+}
+
+h1 {
+	font-size: 35px
+}
+
+.navbar, h1 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.navbar .navbar-form {
+	padding-right:0;
+	margin-right:-2px;
+}
+
+.navbar, .navbar-brand, .navbar .dropdown-menu {
+	font-size:20px;
+	left:0;
+}
+
+.page-header {
+	margin:0;
+	padding:0 0 10px 0;
+}
+.page-header .btn {
+	position:relative;
+	top:6px;
+}
+
+@media (min-width: 768px){
+	.container {
+		max-width: 100%;
+	}
+}
+
+@media (min-width: 992px){
+	.container {
+		max-width: 100%;
+	}
+}

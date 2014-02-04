@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Definitions{% endblock %}
+{% block content %}
+	<table  class="table">
+		{% for definition in definitions %}
+			<tr>
+				<td style="width:30%;"><strong>{{definition['term']}}</strong></td>
+				<td>{{definition['definition']}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
