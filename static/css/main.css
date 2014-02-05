@@ -10,14 +10,13 @@ h1 {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-.navbar .navbar-form {
-	padding-right:0;
-	margin-right:-2px;
-}
 
 .navbar, .navbar-brand, .navbar .dropdown-menu {
 	font-size:20px;
-	left:0;
+}
+
+.navbar .dropdown-menu {
+	top:50px;
 }
 
 .page-header {

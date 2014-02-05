@@ -1,10 +1,11 @@
-from flask import Flask, request, redirect, render_template, url_for, abort
+from flask import Flask, request, redirect, render_template, url_for, abort, Response
 from flaskext.markdown import Markdown
 from neomodel.exception import DoesNotExist as NodeDoesNotExist
 import jinja2
 import os
 import models
 import forms
+import json
 
 import re
 import urllib
@@ -59,12 +60,41 @@ def parse_legislation(url):
 def index():
     return render_template('index.html')
 
+@app.route("/graph.json")
+def graph_json():
+
+    nodes = []
+    edges = []
+
+    for intent in models.Intent.category().instance.all():
+        nodes.append({'uid':intent.uid, 'title': intent.title, 'category': 'intent' })
+
+    for measure in models.Measure.category().instance.all():
+        nodes.append({'uid':measure.uid, 'title': measure.title, 'category': 'measure' })
+        edges.append((measure.uid, nodes[0]['uid']))
+
+
+    # for node in nodes:
+    #     pass
+
+
+
+    # from neomodel import cypher_query
+    # results, columns =  cypher_query('START n=node(*) MATCH (n)-[r]->(m) RETURN n,r,m;')
+    # print columns
+    # for row in columns:
+    #     print row
+
+    data = {'nodes': nodes, 'edges': edges}
+    response = Response(json.dumps(data), status=200, mimetype='application/json')
+    return response
+
 @app.route("/intents")
 def intents():
     intents = models.Intent.category()
     return render_template('intents.html', intents=intents.instance.all())
 
-@app.route("/intents/edit/<uid>", methods=['GET', 'POST'])
+@app.route("/intents/<uid>", methods=['GET', 'POST'])
 def intent_edit(uid):
 
     form = forms.IntentForm(request.form)
@@ -73,12 +103,6 @@ def intent_edit(uid):
     if request.method == 'GET' and uid != 'new':
         form.title.data = intent.title
         form.description.data = intent.description
-        form.measured_by.choices = []
-
-        for measure in models.Measure.category().instance.all():
-            form.measured_by.choices.append((measure.uid, measure.title))
-
-        for measure in intent.measured_by.all()
 
     if request.method == 'POST' and form.validate():
         
@@ -86,11 +110,6 @@ def intent_edit(uid):
         intent.title = form.title.data
         intent.description = form.description.data
         intent.save()
-
-        for measure_uid in form.meaured_by.data:
-            measure = models.Measure.index.get(uid=measure_uid)
-            intent.measured_by.connect(measure)
-
 
         return redirect(url_for('intents'))
 
@@ -101,7 +120,7 @@ def measures():
     measures = models.Measure.category()
     return render_template('measures.html', measures=measures.instance.all())
 
-@app.route("/measures/edit/<uid>", methods=['GET', 'POST'])
+@app.route("/measures/<uid>", methods=['GET', 'POST'])
 def measure_edit(uid):
 
     form = forms.MeasureForm(request.form)
