@@ -2,7 +2,6 @@
 <html>
 <head>
         <meta name="viewport" content="width=device-width,minimum-scale=1.0, maximum-scale=1.0" />
-        
         <script type="text/javascript" src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='vendor/d3/d3.min.js') }}"></script>
@@ -10,7 +9,7 @@
         <script type="text/javascript" src="{{ url_for('static', filename='vendor/arbor/lib/arbor-tween.js') }}"></script>
 
         <script type="text/javascript" src="{{ url_for('static', filename='javascript/main.js') }}"></script>
-        
+
 <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/dist/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
         <title>{% block title %}{% endblock %} | policygrok</title>
@@ -44,7 +43,7 @@
                 <li><a href="{{ url_for('regulations') }}">Regulations</a></li>
                 <li><a href="{{ url_for('legislation') }}">Legislation</a></li>
                 <li class="divider"></li>
-                <li><a href="{{ url_for('timeline') }}">Timeline</a></li>            
+                <li><a href="{{ url_for('timeline') }}">Timeline</a></li>
                 <li><a href="{{ url_for('experts') }}">Experts</a></li>
               </ul>
             </li>
